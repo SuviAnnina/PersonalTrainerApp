@@ -8,9 +8,11 @@ import dayjs from 'dayjs'
 
 function Training() {
 
-    const [trainings, setTrainings] = useState([]);
 
-    /* kalenteri komponenttia varten eti ja käytä react-big-calendar */
+    /*      Uuden harjoituksen lisääminen asiakkaalle. Käytä harjoituksen päivämäärän syöttöön jotain siihen soveltuvaa komponenttia
+            Harjoituksen poisto. Lisää poistotoimintoihin myös vahvistus käyttäjältä. */
+
+    const [trainings, setTrainings] = useState([]);
 
     useEffect(() => {
         fetchTrainings();

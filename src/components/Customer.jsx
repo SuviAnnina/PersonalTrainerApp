@@ -3,8 +3,11 @@ import { AgGridReact } from "ag-grid-react";
 import Button from "@mui/material/Button";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-material.css";
+import AddCustomer from "./AddCustomer";
 
 function Customer() {
+
+    /* Asiakkaan muokkaus ja poisto */
 
     const [customers, setCustomers] = useState([]);
 
@@ -39,6 +42,7 @@ function Customer() {
 
     return (
         <>
+            <AddCustomer fetchCustomers={fetchCustomers} />
             <div className="ag-theme-material" style={{ width: "95%", height: 800 }}>
                 <AgGridReact
                     rowData={customers}
