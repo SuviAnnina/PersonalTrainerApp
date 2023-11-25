@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useState } from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogTitle from '@mui/material/DialogTitle';
-import CustomerDialog from "./CustomerDialog";
+import CustomerDialog from './CustomerDialog';
 
-function AddCustomer({ fetchCustomers }) {
+function EditCustomer({ fetchCustomers, data }) {
 
     const [customer, setCustomer] = useState({
         firstname: "",
@@ -21,27 +21,32 @@ function AddCustomer({ fetchCustomers }) {
 
     const handleClickOpen = () => {
         setOpen(true);
-    };
+        setCustomer({
+            firstname: data.firstname,
+            lastname: data.lastname,
+            streetaddress: data.streetaddress,
+            postcode: data.postcode,
+            city: data.city,
+            email: data.email,
+            phone: data.phone
+        })
+    }
 
     const handleClose = () => {
         setOpen(false);
     }
 
-    const handleChange = (e) => {
-        setCustomer({ ...customer, [e.target.name]: e.target.value });
-    }
-
     const saveCustomer = () => {
-        fetch(import.meta.env.VITE_API_URL + '/api/customers', {
-            method: "POST",
+        fetch(data.links.find(link => link.rel === "self").href, {
+            method: 'PUT',
             headers: {
-                "Content-type": "application/json"
+                'Content-type': 'application/json'
             },
             body: JSON.stringify(customer)
         })
             .then(response => {
                 if (!response.ok)
-                    throw new Error("Error when adding a new customer: " + response.statusText);
+                    throw new Error("Error when adding car: " + response.statusText);
 
                 fetchCustomers();
             })
@@ -50,11 +55,15 @@ function AddCustomer({ fetchCustomers }) {
         handleClose();
     }
 
+    const handleChange = (e) => {
+        setCustomer({ ...customer, [e.target.name]: e.target.value });
+    }
+
     return (
         <div>
-            <Button variant="outlined" onClick={handleClickOpen}>Add a new customer</Button>
+            <Button size="small" onClick={handleClickOpen} >Edit</Button>
             <Dialog open={open} onClose={handleClose}>
-                <DialogTitle>New Customer</DialogTitle>
+                <DialogTitle>Edit customer</DialogTitle>
                 <CustomerDialog customer={customer} handleChange={handleChange} />
                 <DialogActions>
                     <Button onClick={handleClose}>Cancel</Button>
@@ -65,4 +74,4 @@ function AddCustomer({ fetchCustomers }) {
     );
 }
 
-export default AddCustomer
+export default EditCustomer
