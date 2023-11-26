@@ -1,49 +1,44 @@
 import DialogContent from '@mui/material/DialogContent';
 import TextField from '@mui/material/TextField';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
+import Stack from '@mui/material/Stack';
 
-import moment from 'moment';
-
-function TrainingDialog({ training, handleChange }) {
+function TrainingDialog({ training, handleChange, handleTimeChange }) {
 
     return (
         <DialogContent>
-            <TextField
-                name="date"
-                margin="dense"
-                label="date and time (DD.MM.YYYY hh:mm)"
-                fullWidth variant="standard"
-                value={training.date}
-                onChange={handleChange}
-            />
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <Stack spacing={4} sx={{ minWidth: 305 }}>
 
-            <TextField
-                name="activity"
-                margin="dense"
-                label="activity"
-                fullWidth variant="standard"
-                value={training.activity}
-                onChange={handleChange}
-            />
+                    <DateTimePicker
+                        label="Date and time"
+                        value={training.date}
+                        onChange={handleTimeChange}
+                    />
 
-            <TextField
-                name="duration"
-                margin="dense"
-                label="duration"
-                fullWidth variant="standard"
-                value={training.duration}
-                onChange={handleChange}
-            />
+                    <TextField
+                        name="activity"
+                        margin="dense"
+                        label="activity"
+                        fullWidth variant="standard"
+                        value={training.activity}
+                        onChange={handleChange}
+                    />
 
-            {/*             <TextField
-                name="customer"
-                margin="dense"
-                label="customer"
-                fullWidth variant="standard"
-                value={training.customer}
-                onChange={handleChange}
-            /> */}
+                    <TextField
+                        name="duration"
+                        margin="dense"
+                        label="duration"
+                        fullWidth variant="standard"
+                        value={training.duration}
+                        onChange={handleChange}
+                    />
 
-        </DialogContent>
+                </Stack>
+            </LocalizationProvider>
+        </DialogContent >
     )
 }
 

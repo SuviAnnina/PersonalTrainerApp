@@ -4,6 +4,7 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogTitle from '@mui/material/DialogTitle';
 import CustomerDialog from './CustomerDialog';
+import EditIcon from '@mui/icons-material/Edit';
 
 function EditCustomer({ fetchCustomers, data }) {
 
@@ -61,7 +62,7 @@ function EditCustomer({ fetchCustomers, data }) {
 
     return (
         <div>
-            <Button size="small" onClick={handleClickOpen} >Edit</Button>
+            <Button size="small" onClick={handleClickOpen} ><EditIcon /></Button>
             <Dialog open={open} onClose={handleClose}>
                 <DialogTitle>Edit customer</DialogTitle>
                 <CustomerDialog customer={customer} handleChange={handleChange} />

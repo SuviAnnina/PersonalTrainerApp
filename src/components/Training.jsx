@@ -13,20 +13,6 @@ function Training() {
         fetchTrainings();
     }, []);
 
-    const [columnDefs] = useState([
-        /* { field: "id", sortable: true, filter: true }, */
-        { headerName: "Date", field: "date", sortable: true, filter: true, valueGetter: (params) => formatTrainingDate(params.data.date), },
-        { field: "duration", sortable: true, filter: true },
-        { field: "activity", sortable: true, filter: true },
-        { headerName: "Customer", field: "customer.firstname", valueGetter: (params) => `${params.data.customer.firstname} ${params.data.customer.lastname}`, sortable: true, filter: true },
-        {
-            cellRenderer: params => <Button size="small" onClick={() => {
-                deleteTraining("https://traineeapp.azurewebsites.net/api/trainings/" + params.data.id)
-            }} >Delete</Button>,
-            width: 120
-        }
-    ]);
-
     const fetchTrainings = () => {
         fetch("https://traineeapp.azurewebsites.net/gettrainings")
             .then(response => {
@@ -38,6 +24,35 @@ function Training() {
             .then(data => setTrainings(data))
             .catch(err => console.error(err))
     }
+
+    const [columnDefs] = useState([
+        /* { field: "id", sortable: true, filter: true }, */
+        { headerName: "Date", field: "date", sortable: true, filter: true, valueGetter: (params) => formatTrainingDate(params.data.date), },
+        { field: "duration", sortable: true, filter: true },
+        { field: "activity", sortable: true, filter: true },
+        {
+            headerName: "Customer",
+            field: "customer.firstname",
+            valueGetter: (params) => {
+                const customer = params.data.customer;
+
+                if (customer && customer.firstname) {
+                    return `${params.data.customer.firstname} ${params.data.customer.lastname}`;
+                } else {
+                    return '';
+                }
+            },
+            sortable: true,
+            filter: true
+        },
+        {
+            cellRenderer: params => <Button size="small" onClick={() => {
+                deleteTraining("https://traineeapp.azurewebsites.net/api/trainings/" + params.data.id)
+            }} >Delete</Button>,
+            width: 120
+        }
+    ]);
+
 
     const formatTrainingDate = (date) => {
         return dayjs(date).format("DD.MM.YYYY HH:mm");

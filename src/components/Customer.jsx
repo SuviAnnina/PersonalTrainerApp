@@ -7,6 +7,9 @@ import AddCustomer from "./AddCustomer";
 import EditCustomer from "./EditCustomer";
 import AddTraining from "./AddTraining";
 
+import DeleteIcon from '@mui/icons-material/Delete';
+
+
 function Customer() {
 
     const [customers, setCustomers] = useState([]);
@@ -20,27 +23,27 @@ function Customer() {
         { field: "firstname", sortable: true, filter: true },
         { field: "lastname", sortable: true, filter: true },
         { field: "streetaddress", sortable: true, filter: true },
-        { field: "postcode", sortable: true, filter: true },
-        { field: "city", sortable: true, filter: true },
+        { field: "postcode", sortable: true, filter: true, width: 140 },
+        { field: "city", sortable: true, filter: true, width: 140 },
         { field: "email", sortable: true, filter: true },
-        { field: "phone", sortable: true, filter: true },
+        { field: "phone", sortable: true, filter: true, width: 130 },
 
         {
             cellRenderer: params => <EditCustomer fetchCustomers={fetchCustomers} data={params.data} />,
-            width: 120
+            width: 90
         },
 
         {
             cellRenderer: params => <Button size="small" onClick={() => {
                 //console.log(params.data);
                 deleteCustomer(params.data.links.find(link => link.rel === "self").href)
-            }} >Delete</Button>,
-            width: 120
+            }} ><DeleteIcon /></Button>,
+            width: 90
         },
 
         {
             cellRenderer: params => <AddTraining data={params.data} fetchCustomers={fetchCustomers} />,
-            width: 120
+
         }
 
 
