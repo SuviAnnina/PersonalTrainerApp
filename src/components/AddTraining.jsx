@@ -6,8 +6,9 @@ import DialogTitle from '@mui/material/DialogTitle';
 import TrainingDialog from "./TrainingDialog";
 import dayjs from 'dayjs';
 
-function AddTraining({ fetchTrainings, fetchCustomers, data }) {
+function AddTraining({ data }) {
 
+    const [open, setOpen] = useState(false);
     const [training, setTraining] = useState({
         date: null,
         activity: "",
@@ -15,7 +16,6 @@ function AddTraining({ fetchTrainings, fetchCustomers, data }) {
         customer: data.links.find(link => link.rel === "self").href
     });
 
-    const [open, setOpen] = useState(false);
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -57,13 +57,19 @@ function AddTraining({ fetchTrainings, fetchCustomers, data }) {
             })
             .catch(err => console.error(err))
         handleClose();
+        setTraining({
+            date: null,
+            activity: "",
+            duration: "",
+            customer: data.links.find(link => link.rel === "self").href
+        })
     }
 
     return (
         <div>
             <Button variant="outlined" onClick={handleClickOpen}>Add training</Button>
             <Dialog open={open} onClose={handleClose}>
-                <DialogTitle>New Training </DialogTitle>
+                <DialogTitle>New Training for {data.firstname} {data.lastname}</DialogTitle>
                 <TrainingDialog training={training} handleChange={handleChange} handleTimeChange={handleTimeChange} />
                 <DialogActions>
                     <Button onClick={handleClose} >Cancel</Button>

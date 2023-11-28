@@ -6,7 +6,6 @@ import "ag-grid-community/styles/ag-theme-material.css";
 import AddCustomer from "./AddCustomer";
 import EditCustomer from "./EditCustomer";
 import AddTraining from "./AddTraining";
-
 import DeleteIcon from '@mui/icons-material/Delete';
 
 
@@ -27,30 +26,20 @@ function Customer() {
         { field: "city", sortable: true, filter: true, width: 140 },
         { field: "email", sortable: true, filter: true },
         { field: "phone", sortable: true, filter: true, width: 130 },
-
         {
             cellRenderer: params => <EditCustomer fetchCustomers={fetchCustomers} data={params.data} />,
             width: 90
         },
-
         {
             cellRenderer: params => <Button size="small" onClick={() => {
-                //console.log(params.data);
                 deleteCustomer(params.data.links.find(link => link.rel === "self").href)
             }} ><DeleteIcon /></Button>,
             width: 90
         },
-
-        {
-            cellRenderer: params => <AddTraining data={params.data} fetchCustomers={fetchCustomers} />,
-
-        }
-
-
+        { cellRenderer: params => <AddTraining data={params.data} /> }
     ]);
 
     const fetchCustomers = () => {
-        /* fetch("https://traineeapp.azurewebsites.net/api/customers") */
         fetch(import.meta.env.VITE_API_URL + '/api/customers')
             .then(response => {
                 if (response.ok)

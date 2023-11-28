@@ -48,6 +48,15 @@ function AddCustomer({ fetchCustomers }) {
             .catch(err => console.error(err))
 
         handleClose();
+        setCustomer({
+            firstname: "",
+            lastname: "",
+            streetaddress: "",
+            postcode: "",
+            city: "",
+            email: "",
+            phone: ""
+        })
     }
 
     return (
