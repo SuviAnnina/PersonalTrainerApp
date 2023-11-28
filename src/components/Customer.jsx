@@ -7,18 +7,12 @@ import AddCustomer from "./AddCustomer";
 import EditCustomer from "./EditCustomer";
 import AddTraining from "./AddTraining";
 import DeleteIcon from '@mui/icons-material/Delete';
-
+import { CSVLink } from "react-csv";
 
 function Customer() {
 
     const [customers, setCustomers] = useState([]);
-
-    useEffect(() => {
-        fetchCustomers();
-    }, []);
-
     const [columnDefs] = useState([
-        /* { field: "id", sortable: true, filter: true }, */
         { field: "firstname", sortable: true, filter: true },
         { field: "lastname", sortable: true, filter: true },
         { field: "streetaddress", sortable: true, filter: true },
@@ -39,6 +33,10 @@ function Customer() {
         { cellRenderer: params => <AddTraining data={params.data} /> }
     ]);
 
+    useEffect(() => {
+        fetchCustomers()
+    }, []);
+
     const fetchCustomers = () => {
         fetch(import.meta.env.VITE_API_URL + '/api/customers')
             .then(response => {
@@ -46,9 +44,7 @@ function Customer() {
                     return response.json();
                 else
                     throw new Error("Error in fetch: " + response.statusText);
-            }
-
-            )
+            })
             .then(data => setCustomers(data.content))
             .catch(err => console.error(err))
     }
@@ -66,9 +62,20 @@ function Customer() {
         }
     }
 
+    const csvData = [
+        ["Firstname", "Lastname", "Streetaddress", "Postcode", "City", "Email", "Phone"],
+        ...customers.map(({ firstname, lastname, streetaddress, postcode, city, email, phone }) => [
+            firstname, lastname, streetaddress, postcode, city, email, phone
+        ]),
+    ];
+
     return (
         <>
-            <AddCustomer fetchCustomers={fetchCustomers} />
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+                <AddCustomer fetchCustomers={fetchCustomers} />
+                <Button variant="outlined"><CSVLink data={csvData} filename="customers.csv" style={{ color: 'inherit', textDecoration: 'none' }}>Export CSV file</CSVLink></Button>
+            </div>
+
             <div className="ag-theme-material" style={{ width: "95%", height: 800 }}>
                 <AgGridReact
                     rowData={customers}

@@ -10,7 +10,7 @@ function Training() {
     const [trainings, setTrainings] = useState([]);
 
     useEffect(() => {
-        fetchTrainings();
+        fetchTrainings()
     }, []);
 
     const fetchTrainings = () => {
@@ -26,7 +26,6 @@ function Training() {
     }
 
     const [columnDefs] = useState([
-        /* { field: "id", sortable: true, filter: true }, */
         { headerName: "Date", field: "date", sortable: true, filter: true, valueGetter: (params) => formatTrainingDate(params.data.date), },
         { field: "duration", sortable: true, filter: true },
         { field: "activity", sortable: true, filter: true },
