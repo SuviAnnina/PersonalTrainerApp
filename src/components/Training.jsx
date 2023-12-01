@@ -14,7 +14,7 @@ function Training() {
     }, []);
 
     const fetchTrainings = () => {
-        fetch("https://traineeapp.azurewebsites.net/gettrainings")
+        fetch(import.meta.env.VITE_API_URL + '/gettrainings')
             .then(response => {
                 if (response.ok)
                     return response.json();

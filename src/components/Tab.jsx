@@ -9,6 +9,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Container from "@mui/material/Container";
 import CalendarApp from './Calendar';
+import TrainingChart from './TrainingChart';
 
 function TabApp() {
 
@@ -30,10 +31,12 @@ function TabApp() {
                 <Tab value="customer" label="Customer" />
                 <Tab value="training" label="Training" />
                 <Tab value="calendar" label="Calendar" />
+                <Tab value="trainingchart" label="Training chart" />
             </Tabs>
             {value === "customer" && <Customer />}
             {value === "training" && <Training />}
             {value === "calendar" && <CalendarApp />}
+            {value === "trainingchart" && <TrainingChart />}
         </Container>
     )
 }

@@ -9,8 +9,13 @@ function CalendarApp() {
     const [trainings, setTrainings] = useState([]);
 
     useEffect(() => {
-        fetch('https://traineeapp.azurewebsites.net/gettrainings')
-            .then(response => response.json())
+        fetch(import.meta.env.VITE_API_URL + '/gettrainings')
+            .then(response => {
+                if (response.ok)
+                    return response.json()
+                else
+                    throw new Error("Error in fetch: " + response.statusText);
+            })
             .then(data => {
                 const mappedTrainings = data.map(training => ({
                     title: `${training.activity} - ${training.customer.firstname} ${training.customer.lastname}`,
