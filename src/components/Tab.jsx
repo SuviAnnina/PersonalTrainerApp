@@ -23,7 +23,7 @@ function TabApp() {
         <Container maxWidth="x2">
             <AppBar position="static">
                 <Toolbar>
-                    <Typography variant="h6">Personal Training App</Typography>
+                    <Typography variant="h6">Personal Trainer App</Typography>
                 </Toolbar>
             </AppBar>
 

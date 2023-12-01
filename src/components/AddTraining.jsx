@@ -16,14 +16,8 @@ function AddTraining({ data }) {
         customer: data.links.find(link => link.rel === "self").href
     });
 
-
-    const handleClickOpen = () => {
-        setOpen(true);
-    }
-
-    const handleClose = () => {
-        setOpen(false);
-    }
+    const handleClickOpen = () => { setOpen(true); }
+    const handleClose = () => { setOpen(false); }
 
     const handleChange = (e) => {
         setTraining({

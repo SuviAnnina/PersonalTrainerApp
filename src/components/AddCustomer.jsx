@@ -18,18 +18,9 @@ function AddCustomer({ fetchCustomers }) {
     });
 
     const [open, setOpen] = useState(false);
-
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
-
-    const handleClose = () => {
-        setOpen(false);
-    }
-
-    const handleChange = (e) => {
-        setCustomer({ ...customer, [e.target.name]: e.target.value });
-    }
+    const handleClickOpen = () => { setOpen(true); };
+    const handleClose = () => { setOpen(false); }
+    const handleChange = (e) => { setCustomer({ ...customer, [e.target.name]: e.target.value }); }
 
     const saveCustomer = () => {
         fetch(import.meta.env.VITE_API_URL + '/api/customers', {
@@ -48,15 +39,7 @@ function AddCustomer({ fetchCustomers }) {
             .catch(err => console.error(err))
 
         handleClose();
-        setCustomer({
-            firstname: "",
-            lastname: "",
-            streetaddress: "",
-            postcode: "",
-            city: "",
-            email: "",
-            phone: ""
-        })
+        setCustomer({ firstname: "", lastname: "", streetaddress: "", postcode: "", city: "", email: "", phone: "" })
     }
 
     return (

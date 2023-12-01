@@ -20,10 +20,7 @@ function Customer() {
         { field: "city", sortable: true, filter: true, width: 140 },
         { field: "email", sortable: true, filter: true },
         { field: "phone", sortable: true, filter: true, width: 130 },
-        {
-            cellRenderer: params => <EditCustomer fetchCustomers={fetchCustomers} data={params.data} />,
-            width: 90
-        },
+        { cellRenderer: params => <EditCustomer fetchCustomers={fetchCustomers} data={params.data} />, width: 90 },
         {
             cellRenderer: params => <Button size="small" onClick={() => {
                 deleteCustomer(params.data.links.find(link => link.rel === "self").href)
