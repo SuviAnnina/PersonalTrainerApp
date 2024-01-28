@@ -74,10 +74,18 @@ I used the following components; Ag-Grid, React Big Calendar, Recharts, and the 
 5. Run server on localhost   
 >   npm run dev  
 
-![alt Kuvakaappaus Personal Trainer Appista](/.screenshots/PTApp02.png)   
-![alt Kuvakaappaus Personal Trainer Appista](/.screenshots/PTApp03.png)  
-![alt Kuvakaappaus Personal Trainer Appista](/.screenshots/PTApp04.png)  
+## Kuvakaappaukset - Screenshots  
+Asiakassivu - Customer tab  
+![alt Kuvakaappaus Personal Trainer Appista](/.screenshots/PTApp01.png)     
+Asiakkaan muokkaus - Edit customer  
+![alt Kuvakaappaus Personal Trainer Appista](/.screenshots/PTApp02.png)     
+Uuden treenin lisäys - Add new training to customer  
+![alt Kuvakaappaus Personal Trainer Appista](/.screenshots/PTApp06.png)    
+Asiakkaan poisto - Delete customer  
+![alt Kuvakaappaus Personal Trainer Appista](/.screenshots/PTApp03.png)    
+Treenisivu - Training tab  
+![alt Kuvakaappaus Personal Trainer Appista](/.screenshots/PTApp04.png)    
+Kalenteri - Calendar tab  
 ![alt Kuvakaappaus Personal Trainer Appista](/.screenshots/PTA05.png)  
-![alt Kuvakaappaus Personal Trainer Appista](/.screenshots/PTApp06.png)  
   
  
